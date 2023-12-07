@@ -1,1 +1,1 @@
-# RetNet_JAX_LM_Japanese
+# RetNet_JAX_LM
