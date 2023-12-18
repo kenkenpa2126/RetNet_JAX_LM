@@ -2,6 +2,8 @@ from typing import Callable, Any, Optional
 
 from flax import linen as nn
 from flax import struct
+
+import jax
 from jax import lax
 import jax.numpy as jnp
 from jax.nn import relu, gelu, silu
@@ -160,19 +162,15 @@ class MultiScaleRetention(nn.Module):
         self.group_norm = RMSNorm(self.head_dim, eps=self.config.layernorm_eps, elementwise_affine=False)
 
     def parallel_forward(self, qr, kr, v, mask):
-        # このメソッドの内部ロジックをPyTorchからJAXに変換する必要があります。
         pass
 
     def recurrent_forward(self, qr, kr, v, decay, incremental_state):
-        # このメソッドの内部ロジックをPyTorchからJAXに変換する必要があります。
         pass
 
     def chunk_recurrent_forward(self, qr, kr, v, inner_mask):
-        # このメソッドの内部ロジックをPyTorchからJAXに変換する必要があります。
         pass
 
     def __call__(self, x, rel_pos, chunkwise_recurrent=False, incremental_state=None):
-        # このメソッドの内部ロジックをPyTorchからJAXに変換する必要があります。
         pass
 
 
@@ -295,7 +293,6 @@ class RetNetDecoderLayer(nn.Module):
         x = self.dropout_module(x, deterministic=False)
 
         if self.drop_path is not None:
-            # rng は drop_path に渡すための乱数ジェネレータです
             rng, sub_rng = jax.random.split(rng)
             x = self.drop_path(x, sub_rng)
 
@@ -346,23 +343,15 @@ class RetNetModel(nn.Module):
         self.recurrent_chunk_size = self.config.recurrent_chunk_size
 
     def build_output_projection(self):
-        # 出力投影レイヤーの構築ロジック
-        # ...
         pass
 
     def forward_embedding(self, tokens, token_embedding=None, incremental_state=None):
-        # 埋め込み層のフォワードパス
-        # ...
         pass
 
     def __call__(self, prev_output_tokens, incremental_state=None, features_only=False, token_embeddings=None):
-        # モデルのフォワードパス
-        # ...
         pass
 
     def output_layer(self, features):
-        # 出力層のロジック
-        # ...
         pass
 
 
@@ -407,8 +396,6 @@ class RetNetForCausalLM(nn.Module):
 
         loss = None
         if labels is not None:
-            # 損失の計算ロジック
-            # ...
             pass
 
         return logits.astype(self.config.dtype)
